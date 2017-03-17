@@ -3,11 +3,6 @@ module places.address_component;
 
 import places.json_data;
 
-import std.algorithm;
-import std.array;
-
-import vibe.data.json;
-
 struct AddressComponent
 {
     mixin JsonData;

@@ -4,12 +4,6 @@ module places.review;
 import places.aspect_rating;
 import places.json_data;
 
-import std.algorithm;
-import std.array;
-import std.datetime;
-
-import vibe.data.json;
-
 struct Review
 {
     mixin JsonData;

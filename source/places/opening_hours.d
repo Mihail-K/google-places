@@ -4,11 +4,6 @@ module places.opening_hours;
 import places.json_data;
 import places.period;
 
-import std.algorithm;
-import std.array;
-
-import vibe.data.json;
-
 struct OpeningHours
 {
     mixin JsonData;
