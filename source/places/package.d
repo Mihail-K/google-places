@@ -2,6 +2,7 @@
 module places;
 
 public import places.address_component;
+public import places.alt_id;
 public import places.aspect_rating;
 public import places.coordinate;
 public import places.day_time;
