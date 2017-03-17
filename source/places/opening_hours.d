@@ -1,5 +1,5 @@
 
-module places.opening_hour;
+module places.opening_hours;
 
 import places.json_data;
 import places.period;
@@ -9,7 +9,7 @@ import std.array;
 
 import vibe.data.json;
 
-struct OpeningHour
+struct OpeningHours
 {
     mixin JsonData;
 
