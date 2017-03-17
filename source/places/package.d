@@ -13,5 +13,6 @@ public import places.opening_hours;
 public import places.period;
 public import places.photo;
 public import places.review;
+public import places.search;
 public import places.util;
 public import places.viewport;
