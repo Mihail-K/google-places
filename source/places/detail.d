@@ -2,6 +2,7 @@
 module places.detail;
 
 import places.address_component;
+import places.alt_id;
 import places.geometry;
 import places.json_data;
 import places.opening_hour;
@@ -104,6 +105,7 @@ struct Detail
 
     mixin attribute!(AddressComponent[], "addressComponents", "address_components");
     mixin attribute!(string, "adrAddress", "adr_address");
+    mixin attribute!(AltID[], "altIDs", "alt_ids");
     mixin attribute!(string, "formattedAddress", "formatted_address");
     mixin attribute!(string, "formattedPhoneNumber", "formatted_phone_number");
     mixin attribute!(Geometry, "geometry");
