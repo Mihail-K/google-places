@@ -10,8 +10,6 @@ import places.photo;
 import places.review;
 import places.util;
 
-import std.algorithm;
-import std.array;
 import std.meta;
 
 import vibe.data.json;

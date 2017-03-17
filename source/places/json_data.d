@@ -64,6 +64,8 @@ private:
     mixin template attribute(T, string name, string attr = name)
         if(isArray!(T) && isAggregateType!(ForeachType!(T)))
     {
+        import std.algorithm;
+        import std.array;
         import std.format;
 
         mixin(q{
@@ -86,6 +88,8 @@ private:
     mixin template attribute(T, string name, string attr = name)
         if((isArray!(T) && !isSomeString!(T)) && !isAggregateType!(ForeachType!(T)))
     {
+        import std.algorithm;
+        import std.array;
         import std.format;
 
         mixin(q{
