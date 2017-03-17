@@ -10,8 +10,6 @@ import places.photo;
 import places.review;
 import places.util;
 
-import vibe.http.client;
-
 struct DetailsResult
 {
     mixin JsonData;
@@ -44,14 +42,7 @@ struct DetailsResult
 
 struct Details
 {
-    enum detailUrl = "https://maps.googleapis.com/maps/api/place/details/json";
-
     mixin JsonData;
-
-    static const(Details) get(string[string] parameters)
-    {
-        return Details(requestHTTP(buildUrl(detailUrl, parameters)).readJson);
-    }
 
     mixin attribute!(string, "errorMessage", "error_message");
     mixin attribute!(string[], "htmlAttributes", "html_attributes");

@@ -8,8 +8,6 @@ import places.opening_hours;
 import places.photo;
 import places.util;
 
-import vibe.http.client;
-
 struct SearchResult
 {
     mixin JsonData;
@@ -34,14 +32,7 @@ struct SearchResult
 
 struct Search
 {
-    enum searchUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-
     mixin JsonData;
-
-    static const(Search) get(string[string] parameters)
-    {
-        return Search(requestHTTP(buildUrl(searchUrl, parameters)).readJson);
-    }
 
     mixin attribute!(string, "errorMessage", "error_message");
     mixin attribute!(string[], "htmlAttributes", "html_attributes");
