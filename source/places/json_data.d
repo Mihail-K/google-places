@@ -36,7 +36,7 @@ private:
             @property
             const(T) %s() const
             {
-                auto ptr = attr in _json;
+                const auto ptr = attr in _json;
                 return ptr ? (*ptr).to!T : T.init;
             }
         }.format(name));
@@ -53,8 +53,8 @@ private:
             {
                 import vibe.data.json;
 
-                auto ptr  = attr in _json;
-                auto json = ptr ? *ptr : Json.emptyObject;
+                const auto ptr  = attr in _json;
+                const auto json = ptr ? *ptr : Json.emptyObject;
 
                 return T(json);
             }
@@ -73,7 +73,7 @@ private:
                 import std.traits;
                 import vibe.data.json;
 
-                if(auto ptr = attr in _json)
+                if(const auto ptr = attr in _json)
                 {
                     return (*ptr).get!(Json[]).map!(ForeachType!(T)).array;
                 }
@@ -95,7 +95,7 @@ private:
                 import std.traits;
                 import vibe.data.json;
 
-                if(auto ptr = attr in _json)
+                if(const auto ptr = attr in _json)
                 {
                     return (*ptr).get!(Json[]).map!(json => json.to!(ForeachType!(T))).array;
                 }

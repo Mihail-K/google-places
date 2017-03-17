@@ -77,7 +77,7 @@ public:
 
         foreach(name; attributes)
         {
-            string value = __traits(getMember, this, name);
+            immutable string value = __traits(getMember, this, name);
             
             if(value !is null)
             {
@@ -95,12 +95,12 @@ struct Detail
 
     enum baseUrl = "https://maps.googleapis.com/maps/api/place/details/json";
 
-    static Detail get(string apiKey, string placeID)
+    static const(Detail) get(string apiKey, string placeID)
     {
         return get(DetailParameters(apiKey, placeID));
     }
 
-    static Detail get(DetailParameters parameters)
+    static const(Detail) get(DetailParameters parameters)
     {
         return Detail(requestHTTP(buildUrl(baseUrl, parameters.options)).readJson["result"]);
     }
