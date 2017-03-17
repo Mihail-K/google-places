@@ -73,16 +73,13 @@ public:
     @property
     string[string] options() const
     {
-        string[string] result;
+        string[string] result = ["key": apiKey, "place_id": placeID];
 
-        foreach(name; attributes)
-        {
-            immutable string value = __traits(getMember, this, name);
-            
-            if(value !is null)
-            {
-                result[name] = value;
-            }
+        if(extensions !is null) {
+            result["extensions"] = extensions;
+        }
+        if(language !is null) {
+            result["language"] = language;
         }
 
         return result;
