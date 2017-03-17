@@ -109,3 +109,44 @@ private:
         }.format(name));
     }
 }
+
+version(unittest)
+{
+    import vibe.data.json;
+
+    struct TestType
+    {
+        mixin JsonData;
+
+        mixin attribute!(string, "name");
+        mixin attribute!(string, "userName", "user_name");
+        mixin attribute!(string[], "types");
+        mixin attribute!(TestType, "testType", "test_type");
+    }
+}
+
+unittest
+{
+    auto t = TestType(Json([
+        "name":      Json("test-01"),
+        "user_name": Json("test-02"),
+        "types":     Json([
+            Json("test-03"),
+            Json("test-04"),
+            Json("test-05")
+        ]),
+        "test_type": Json([
+            "name":      Json("test-06"),
+            "user_name": Json("test-07")
+        ])
+    ]));
+
+    assert(t.name == "test-01");
+    assert(t.userName == "test-02");
+    assert(t.types == [
+        "test-03", "test-04", "test-05"
+    ]);
+    assert(t.testType.name == "test-06");
+    assert(t.testType.userName == "test-07");
+    assert(t.testType.types == null);
+}
