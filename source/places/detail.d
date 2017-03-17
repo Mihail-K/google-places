@@ -11,9 +11,83 @@ import places.util;
 
 import std.algorithm;
 import std.array;
+import std.meta;
 
 import vibe.data.json;
 import vibe.http.client;
+
+struct DetailParameters
+{
+    alias attributes = AliasSeq!("apiKey", "placeID", "extensions", "language");
+
+private:
+    string _apiKey;
+    string _placeID;
+    string _extensions;
+    string _language;
+
+public:
+    this(string apiKey, string placeID, string extensions = null, string language = null)
+    {
+        _apiKey     = apiKey;
+        _placeID    = placeID;
+        _extensions = extensions;
+        _language   = language;
+    }
+
+    this(string[string] options)
+    {
+        foreach(name; attributes)
+        {
+            if(auto ptr = name in options)
+            {
+                __traits(getMember, this, "_" ~ name) = *ptr;
+            }
+        }
+    }
+
+    @property
+    string apiKey() const
+    {
+        return _apiKey;
+    }
+
+    @property
+    string placeID() const
+    {
+        return _placeID;
+    }
+
+    @property
+    string extensions() const
+    {
+        return _extensions;
+    }
+
+    @property
+    string language() const
+    {
+        return _language;
+    }
+
+    @property
+    string[string] options() const
+    {
+        string[string] result;
+
+        foreach(name; attributes)
+        {
+            string value = __traits(getMember, this, name);
+            
+            if(value !is null)
+            {
+                result[name] = value;
+            }
+        }
+
+        return result;
+    }
+}
 
 struct Detail
 {
@@ -23,10 +97,12 @@ struct Detail
 
     static Detail get(string apiKey, string placeID)
     {
-        return Detail(requestHTTP(buildUrl(baseUrl, [
-            "place_id": placeID,
-            "key":      apiKey
-        ])).readJson["result"]);
+        return get(DetailParameters(apiKey, placeID));
+    }
+
+    static Detail get(DetailParameters parameters)
+    {
+        return Detail(requestHTTP(buildUrl(baseUrl, parameters.options)).readJson["result"]);
     }
 
     mixin attribute!(AddressComponent[], "addressComponents", "address_components");
