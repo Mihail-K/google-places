@@ -1,5 +1,5 @@
 name "google-places"
-description "A wrapper for the Google Places API."
+description "A D wrapper for the Google Places API."
 authors "Mihail K"
 copyright "Copyright © 2017, Mihail K"
 license "MIT"
