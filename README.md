@@ -10,7 +10,7 @@ Your API key is managed by the `PlacesClient` which automatically adds the key t
 auto client  = PlacesClient("your-api-key");
 auto details = client.details("some-place-id");
 
-foreach(review; details.reviews)
+foreach(review; details.result.reviews)
 {
     // Object attributes are camelCased.
     writeln("Author: ", review.authorName);
