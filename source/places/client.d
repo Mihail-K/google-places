@@ -7,7 +7,7 @@ import places.util;
 
 import vibe.http.client;
 
-struct Client
+struct PlacesClient
 {
 private:
     string _key;
